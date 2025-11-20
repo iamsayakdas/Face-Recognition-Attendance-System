@@ -1,7 +1,9 @@
 from flask import Flask, render_template, redirect, url_for, request, flash, send_file
-import db
 import pandas as pd
 from datetime import datetime
+
+import db   # <-- import database module
+db.init_db()  # <-- IMPORTANT: create DB tables on Render startup
 
 app = Flask(__name__)
 app.secret_key = "YOUR_SECRET_KEY"
@@ -9,12 +11,15 @@ app.secret_key = "YOUR_SECRET_KEY"
 ADMIN_USER = "admin"
 ADMIN_PASS = "admin123"
 
+
 def check_login(req):
     return req.cookies.get("logged") == "1"
+
 
 @app.route("/")
 def home():
     return redirect("/login")
+
 
 @app.route("/login", methods=["GET", "POST"])
 def login():
@@ -27,7 +32,7 @@ def login():
             resp.set_cookie("logged", "1")
             return resp
         else:
-            flash("Invalid credentials")
+            flash("Invalid username or password")
 
     return render_template("login.html")
 
@@ -62,7 +67,8 @@ def students():
     if not check_login(request):
         return redirect("/login")
 
-    return render_template("students.html", students=db.get_all_students())
+    return render_template("students.html",
+                           students=db.get_all_students())
 
 
 @app.route("/attendance")
@@ -70,7 +76,8 @@ def attendance():
     if not check_login(request):
         return redirect("/login")
 
-    return render_template("attendance.html", attendance=db.get_attendance_joined())
+    return render_template("attendance.html",
+                           attendance=db.get_attendance_joined())
 
 
 @app.route("/export_excel")
@@ -81,10 +88,9 @@ def export_excel():
                       columns=["Date", "Time", "Roll", "Name", "Phone", "Email", "Status"])
 
     df.to_excel("attendance_web.xlsx", index=False)
-
     return send_file("attendance_web.xlsx", as_attachment=True)
 
 
+# Render DOES NOT run app.run(), so this block is only local use
 if __name__ == "__main__":
-    db.init_db()
     app.run(host="0.0.0.0", port=10000)
