@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block title %}Admins{% endblock %}
+{% block content %}
+
+<div class="d-flex justify-content-between align-items-center mb-3">
+  <h2>Admins</h2>
+  <a href="{{ url_for('admins_new') }}" class="btn btn-primary btn-sm">Add Admin</a>
+</div>
+
+<div class="card shadow-sm">
+  <div class="card-body table-responsive">
+    <table class="table table-hover align-middle">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Username</th>
+          <th>Email</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for a in admins %}
+        <tr>
+          <td>{{ a["id"] }}</td>
+          <td>{{ a["username"] }}</td>
+          <td>{{ a["email"] }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+
+{% endblock %}
