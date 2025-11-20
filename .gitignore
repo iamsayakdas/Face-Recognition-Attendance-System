@@ -1,0 +1,10 @@
+__pycache__/
+*.pyc
+encodings.pickle
+attendance.db
+attendance_export.xlsx
+dataset/*
+venv/
+env/
+.DS_Store
+Thumbs.db
