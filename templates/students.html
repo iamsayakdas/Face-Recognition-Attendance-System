@@ -2,27 +2,35 @@
 {% block title %}Students{% endblock %}
 {% block content %}
 
-<h2 class="mb-3">Students List</h2>
+<div class="d-flex justify-content-between align-items-center mb-3">
+  <h2>Students</h2>
+</div>
 
-<div class="table-responsive card shadow p-3">
-  <table class="table table-hover">
-    <thead>
-      <tr>
-        <th>ID</th><th>Roll</th><th>Name</th><th>Phone</th><th>Email</th>
-      </tr>
-    </thead>
-    <tbody>
-      {% for s in students %}
-      <tr>
-        <td>{{ s[0] }}</td>
-        <td>{{ s[1] }}</td>
-        <td>{{ s[2] }}</td>
-        <td>{{ s[3] }}</td>
-        <td>{{ s[4] }}</td>
-      </tr>
-      {% endfor %}
-    </tbody>
-  </table>
+<div class="card shadow-sm">
+  <div class="card-body table-responsive">
+    <table class="table table-hover align-middle">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Roll</th>
+          <th>Name</th>
+          <th>Phone</th>
+          <th>Email</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for s in students %}
+        <tr>
+          <td>{{ s["id"] }}</td>
+          <td>{{ s["roll"] }}</td>
+          <td>{{ s["name"] }}</td>
+          <td>{{ s["phone"] }}</td>
+          <td>{{ s["email"] }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
 </div>
 
 {% endblock %}
