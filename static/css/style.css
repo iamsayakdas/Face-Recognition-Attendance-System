@@ -1,19 +1,48 @@
 body {
   background: #f2f5f9;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
 }
 
-.navbar-brand {
-  font-weight: 700;
+.page-bg {
+  position: fixed;
+  inset: 0;
+  background: radial-gradient(circle at top left, #e0edff 0, transparent 50%),
+              radial-gradient(circle at bottom right, #ffe4f3 0, transparent 50%);
+  opacity: 0.6;
+  z-index: -1;
+}
+
+.navbar-gradient {
+  background: linear-gradient(90deg, #0d6efd, #4b8bff);
 }
 
 .card {
-  border-radius: 12px;
+  border-radius: 14px;
+}
+
+.login-card {
+  margin-top: 60px;
 }
 
 .stat-card {
-  border-left: 6px solid #0d6efd;
+  border: none;
+  background: white;
 }
 
-.table th, .table td {
+.stat-label {
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: #6c757d;
+}
+
+.stat-value {
+  font-size: 2.4rem;
+  font-weight: 700;
+  color: #0d6efd;
+}
+
+.table th,
+.table td {
   vertical-align: middle;
 }
